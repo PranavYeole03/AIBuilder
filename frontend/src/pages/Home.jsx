@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { AnimatePresence, motion } from "motion/react"
-import LoginModel from '../components/loginmodel';
 import { useDispatch, useSelector } from 'react-redux';
 import { Coins } from "lucide-react"
 import axios from 'axios';
