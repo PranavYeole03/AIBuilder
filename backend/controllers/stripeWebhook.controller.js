@@ -27,6 +27,7 @@ export const stripeWebhook = async (req, res) => {
       $inc: { credit },
       plan
     })
+    console.log("UPDATED CREDIT:", updated.credit);
   }
   return res.json({ received: true })
 }
