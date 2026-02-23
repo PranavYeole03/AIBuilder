@@ -4,6 +4,7 @@ import stripe from "../config/stripe.js"
 export const stripeWebhook = async (req, res) => {
   const sig = req.headers["stripe-signature"]
   let event;
+  console.log("🔥 WEBHOOK HIT");
   try {
     event = stripe.webhooks.constructEvent(
       req.body,
