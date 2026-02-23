@@ -26,7 +26,7 @@ export const billing = async (req, res) => {
       ],
       metadata: {
         userId: userId.toString(),
-        credits: plan.credits,
+        credit: plan.credit,
         plan: plan.plan
       },
       success_url: `${process.env.FRONTEND_URL}/`,
