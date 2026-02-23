@@ -11,7 +11,7 @@ import billingRouter from "./routes/billing.route.js";
 import { stripeWebhook } from "./controllers/stripeWebhook.controller.js";
 
 const app = express()
-app.post("api/stripe/webhook", express.raw({ type: "application/json" }), stripeWebhook)
+app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), stripeWebhook)
 
 const port = process.env.PORT || 5000
 
