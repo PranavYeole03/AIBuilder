@@ -5,6 +5,7 @@ export const stripeWebhook = async (req, res) => {
   const sig = req.headers["stripe-signature"]
   let event;
   console.log("🔥 WEBHOOK HIT");
+  console.log("METADATA:", event.data.object.metadata);
   try {
     event = stripe.webhooks.constructEvent(
       req.body,
