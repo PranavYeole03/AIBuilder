@@ -6,6 +6,7 @@ import axios from 'axios';
 import { serverUrl } from '../App';
 import { setUserData } from '../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
+import LoginModal from '../components/LoginModal';
 
 const Home = () => {
   const [openlogin, setOpenLogin] = useState(false)
@@ -82,7 +83,7 @@ const Home = () => {
             <div className='hidden md:inline text-sm text-zinc-400 hover:text-white cursor-pointer' onClick={() => navigate("/pricing")}>
               Pricing
             </div>
-            {userData && <div className='hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm cursor-ointer hover:bg-white/10 transition'>
+            {userData && <div className='hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm cursor-pointer hover:bg-white/10 transition'>
               <Coins size={14} className='text-yellow-400' />
               <span className='text-zinc-300'>Credit</span>
               <span>{userData.credit}</span>
@@ -199,7 +200,7 @@ const Home = () => {
       </footer>
 
       {
-        openlogin && <LoginModel open={openlogin} onClose={() => setOpenLogin(false)} />
+        openlogin && <LoginModal open={openlogin} onClose={() => setOpenLogin(false)} />
       }
     </div>
   )
