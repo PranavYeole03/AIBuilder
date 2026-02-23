@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux"
 import { setUserData } from '../redux/userSlice'
 
 
-const LoginModel = ({ open, onClose }) => {
+const LoginModal = ({ open, onClose }) => {
   const dispatch=useDispatch()
 
   const handleGoogleAuth = async () => {
@@ -100,4 +100,4 @@ const LoginModel = ({ open, onClose }) => {
   )
 }
 
-export default LoginModel
+export default LoginModal
