@@ -7,12 +7,14 @@ import { serverUrl } from '../App';
 import { setUserData } from '../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
 import LoginModal from '../components/LoginModal';
+import confetti from "canvas-confetti";
 
 const Home = () => {
   const [openlogin, setOpenLogin] = useState(false)
   const { userData } = useSelector(state => state.user)
   const [openProfile, setOpenProfile] = useState(false)
   const [websites, setWebsites] = useState([])
+  const [showCelebrate, setShowCelebrate] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate()
 
@@ -20,6 +22,7 @@ const Home = () => {
   const handleLogout = async () => {
     try {
       await axios.get(`${serverUrl}/api/auth/log-out`, { withCredentials: true })
+      sessionStorage.removeItem("loginCelebrated");
       dispatch(setUserData(null))
       setOpenProfile(false)
     } catch (error) {
@@ -66,6 +69,39 @@ const Home = () => {
     }
     handleGetAllWebsites()
   }, [userData])
+
+  useEffect(() => {
+    if (!userData) return;
+
+    // Prevent repeat on refresh
+    if (sessionStorage.getItem("loginCelebrated")) return;
+
+    sessionStorage.setItem("loginCelebrated", "true");
+    setShowCelebrate(true);
+
+    // Left confetti
+    confetti({
+      particleCount: 80,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0, y: 1 }
+    });
+
+    // Right confetti
+    confetti({
+      particleCount: 80,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1, y: 1 }
+    });
+
+    const timer = setTimeout(() => {
+      setShowCelebrate(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [userData]);
+
   return (
     <div className='relative min-h-screen bg-[#040404] text-white overflow-hidden'>
       {/* Header */}
@@ -95,7 +131,7 @@ const Home = () => {
               </button> :
               <div className='relative' ref={profileRef}>
                 <button className='flex items-center' onClick={() => setOpenProfile(!openProfile)}>
-                  <img src={userData.avatar || ` https://ui-avatars.com/api/?name=${userData.name}`} className='w-9 h-9 rounded-full border-white/20 object-cover' /></button>
+                  <img src={userData.avatar || `https://ui-avatars.com/api/?name=${userData.name}`} className='w-9 h-9 rounded-full border-white/20 object-cover' /></button>
                 <AnimatePresence>
                   {openProfile && (
                     <>
@@ -202,6 +238,17 @@ const Home = () => {
       {
         openlogin && <LoginModal open={openlogin} onClose={() => setOpenLogin(false)} />
       }
+      <AnimatePresence>
+        {showCelebrate && (
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 180 }}
+            className="fixed bottom-24 left-1/2 -translate-x-1/2 z-200 "
+          />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
