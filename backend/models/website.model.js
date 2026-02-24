@@ -33,7 +33,7 @@ const websiteSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  deployeURL: {
+  deployeUrl: {
     type: String,
   },
   slug: {
