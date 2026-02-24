@@ -326,7 +326,7 @@ export const deploy = async (req, res) => {
           .slice(0, 60) + website._id.toString().slice(-5);
     }
     website.deployed = true;
-    website.deployeURL = `${process.env.FRONTEND_URL}/site/${website.slug}`;
+    website.deployeUrl = `${process.env.FRONTEND_URL}/site/${website.slug}`;
     await website.save();
 
     return res.status(200).json({
