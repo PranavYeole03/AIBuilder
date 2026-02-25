@@ -215,7 +215,7 @@ const Home = () => {
                 className='cursor-pointer rounded-2xl bg-white/5 border border-white/10 overflow-hidden'>
                 <div className='h-40 bg-black'>
                   <iframe srcDoc={w.latestCode}
-                    sandbox="allow-scripts"
+                    sandbox=""
                     className='w-[140%] h-[140%] scale-[0.72] origin-top-left pointer-events-none bg-white' />
 
                 </div>
