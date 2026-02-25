@@ -21,7 +21,7 @@ export const generateResponse = async (prompt) => {
         },
       ],
       temperature: 0.2,
-      max_tokens: 2500
+      max_tokens: 1500
     }),
   });
   if (!res.ok) {
